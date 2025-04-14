@@ -1,0 +1,45 @@
+{
+    "common": {
+        "buttons": {
+            "login": "Login",
+            "add": "Add"
+        },
+        "validations": {
+            "mandatory": "Mandatory"
+        }
+    },
+    "components": {
+        "header": {
+            "title": "Attendance Management System"
+        }
+    },
+    "pages": {
+        "login": {
+            "header": "Please login to continue",
+            "form": {
+                "userType": {
+                    "label": "User Type"
+                },
+                "id": {
+                    "label": "ID"
+                },
+                "password": {
+                    "label": "Password"
+                }
+            }
+        },
+        "teacherManagement": {
+            "add": {
+                "header": "Add Teacher",
+                "form": {
+                    "name": {
+                        "label": "Name"
+                    },
+                    "dob": {
+                        "label": "Date of Birth"
+                    }
+                }
+            }
+        }
+    }
+}
