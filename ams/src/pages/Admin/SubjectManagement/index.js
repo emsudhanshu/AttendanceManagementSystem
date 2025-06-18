@@ -7,15 +7,16 @@ import { deleteRequest, getRequest, resetStates, setFormData } from "./slice"
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 
-const TeacherManagement = () => {
+const SubjectManagement = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { teachers, deleteAPIStatus } = useSelector(state => state?.teacher)
+    const { subjects, deleteAPIStatus } = useSelector(state => state?.subject)
 
+    console.log(subjects,'3243')
     const commonStrings = languageData?.common?.buttons
-    const localStrings = languageData?.pages?.teacherManagement
+    const localStrings = languageData?.pages?.subjectManagement
 
     const headings = {
         id: {
@@ -23,15 +24,12 @@ const TeacherManagement = () => {
         },
         name: {
             label: localStrings?.form?.name?.label,
-        },
-        subjects: {
-            label: localStrings?.form?.subjects?.label,
         }
     }
 
     const buttonHandler = () => {
         dispatch(setFormData({}));
-        navigate('/add_or_update_teacher', {
+        navigate('/add_or_update_subject', {
             state: {
                 mode: 'add'
             }
@@ -40,7 +38,7 @@ const TeacherManagement = () => {
 
     const updateHandler = (r) => {
         dispatch(setFormData(r));
-        navigate('/add_or_update_teacher', {
+        navigate('/add_or_update_subject', {
             state: {
                 mode: 'update'
             }
@@ -58,7 +56,7 @@ const TeacherManagement = () => {
             <Layout1 title={localStrings?.header} buttonTitle={commonStrings?.add} buttonHandler={buttonHandler}>
                 <ListView
                     headings={headings}
-                    rows={teachers}
+                    rows={subjects}
                     actions={{ updateHandler, deleteHandler }}
                 />
             </Layout1>
@@ -66,4 +64,4 @@ const TeacherManagement = () => {
     )
 }
 
-export default TeacherManagement;
+export default SubjectManagement;

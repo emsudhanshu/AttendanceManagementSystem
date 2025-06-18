@@ -2,56 +2,54 @@ import { useEffect } from 'react';
 import { Form, Formik } from "formik";
 import { Button, Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom';
-import TextInput from '../../common/components/formFields/TextInput';
-import languageData from '../../strings/en.json'
-import SelectDropDown from '../../common/components/formFields/SelectDropDown';
-import { getUserTypes } from './utils';
-import { loginSchema } from '../../helpers/validationSchemas';
-import { loginRequest } from './slice';
-import { Layout1 } from '../../common/components/layouts/Layout1';
+import { useLocation, useNavigate } from 'react-router-dom';
+import TextInput from '../../../../common/components/formFields/TextInput';
+import languageData from '../../../../strings/en.json'
+import { subjectSchema } from '../../../../helpers/validationSchemas';
+import { Layout1 } from '../../../../common/components/layouts/Layout1';
+import { addRequest, updateRequest } from '../slice';
+import { uniqueIdGenerator } from '../../../../helpers/utils';
 
-const Login = () => {
+const AddOrUpdateSubject = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { state } = useLocation();
 
-    const { loginAPIStatus, formData } = useSelector(state => state?.login)
+    const { formData, addAPIStatus, updateAPIStatus } = useSelector(state => state?.subject)
 
     useEffect(() => {
-
-        // navigate('/subject_management')
-
-        // navigate('/student_management')
-
-         navigate('/teacher_management')
-
-        // navigate('/add_or_update_teacher',{state: {
-        //     mode:'update'
-        // }})
-
-        if (loginAPIStatus == 1) {
-            navigate('/admin_dashboard')
+        if (addAPIStatus == 1 || updateAPIStatus == 1) {
+            navigate('/subject_management')
         }
-    }, [loginAPIStatus])
+    }, [addAPIStatus, updateAPIStatus])
+
+    const backHandler = () => {
+        navigate('/subject_management')
+    }
 
     return (
         <Grid>
-            <Layout1 title={languageData.pages.login.header}>
+            <Layout1 title={languageData.pages.subjectManagement?.[state?.mode].header}>
                 <Formik
                     autoComplete='off'
                     enableReinitialize
                     validateOnBlur={false}
                     validateOnChange={true}
                     initialValues={{
-                        userType: formData.userType,
-                        id: formData.id,
-                        password: formData.password
+                        id: state?.mode == 'add' ? uniqueIdGenerator() : formData?.id,
+                        name: formData?.name,
+                        subjects: formData?.subjects,
+                        password: formData?.password
                     }}
-                    validationSchema={loginSchema()}
+                    validationSchema={subjectSchema()}
                     onSubmit={values => {
-                        console.log(values)
-                        dispatch(loginRequest(values))
+                        if (state?.mode == 'add') {
+                            dispatch(addRequest(values))
+                        }
+                        else if (state?.mode == 'update') {
+                            dispatch(updateRequest(values))
+                        }
                     }}
                 >
                     {({
@@ -70,37 +68,29 @@ const Login = () => {
                             }}
                         >
                             <Grid container direction='column' spacing={20} mb={20}>
-                                <Grid item xs={12}>
-                                    <SelectDropDown
-                                        label={languageData.pages.login.form.userType.label}
-                                        errors={errors}
-                                        touched={touched}
-                                        fieldId="userType"
-                                        options={getUserTypes()}
-                                    />
-                                </Grid>
                                 <Grid item xs={12} >
                                     <TextInput
-                                        label={languageData.pages.login.form.id.label}
+                                        label={languageData.pages.subjectManagement.form.id.label}
                                         fieldId={'id'}
                                         errors={errors}
                                         touched={touched}
+                                        disabled
                                     />
                                 </Grid>
                                 <Grid item xs={12} >
                                     <TextInput
-                                        label={languageData.pages.login.form.password.label}
-                                        fieldId={'password'}
+                                        label={languageData.pages.subjectManagement.form.name.label}
+                                        fieldId={'name'}
                                         errors={errors}
                                         touched={touched}
-                                        type='password'
-                                        maxLength={10}
                                     />
                                 </Grid>
-
                                 <Grid item xs={12} container alignItems='center' justifyContent='center'>
                                     <Grid item>
-                                        <Button onClick={submitForm} variant='contained'>{languageData.common.buttons.login}</Button>
+                                        <Button onClick={submitForm} variant='contained'>{languageData.common.buttons?.[state?.mode]}</Button>
+                                    </Grid>
+                                    <Grid item>
+                                        <Button onClick={backHandler} variant='outlined'>{languageData.common.buttons?.back}</Button>
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -113,4 +103,4 @@ const Login = () => {
     )
 }
 
-export default Login;
+export default AddOrUpdateSubject;

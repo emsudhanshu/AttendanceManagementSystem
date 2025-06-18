@@ -1,8 +1,14 @@
 {
     "common": {
+        "texts": {
+            "actions": "Actions"
+        },
         "buttons": {
+            "back": "Back",
             "login": "Login",
-            "add": "Add"
+            "add": "Add",
+            "update": "Update",
+            "delete": "Delete"
         },
         "validations": {
             "mandatory": "Mandatory"
@@ -16,6 +22,7 @@
     "pages": {
         "login": {
             "header": "Please login to continue",
+            "welcome": "Welcome",
             "form": {
                 "userType": {
                     "label": "User Type"
@@ -29,17 +36,67 @@
             }
         },
         "teacherManagement": {
+            "header": "Teacher Management",
             "add": {
-                "header": "Add Teacher",
-                "form": {
+                "header": "Add Teacher"
+            },
+            "update": {
+                "header": "Update Teacher"
+            },
+            "form": {
+                    "id": {
+                        "label": "ID"
+                    },
                     "name": {
                         "label": "Name"
                     },
-                    "dob": {
-                        "label": "Date of Birth"
+                    "subjects": {
+                        "label": "Subjects"
+                    },
+                    "password": {
+                        "label": "Password"
                     }
                 }
-            }
+        },
+        "studentManagement": {
+            "header": "Student Management",
+            "add": {
+                "header": "Add Student"
+            },
+            "update": {
+                "header": "Update Student"
+            },
+            "form": {
+                    "id": {
+                        "label": "ID"
+                    },
+                    "name": {
+                        "label": "Name"
+                    },
+                    "subjects": {
+                        "label": "Subjects"
+                    },
+                    "password": {
+                        "label": "Password"
+                    }
+                }
+        },
+        "subjectManagement": {
+            "header": "Subject Management",
+            "add": {
+                "header": "Add Subject"
+            },
+            "update": {
+                "header": "Update Subject"
+            },
+            "form": {
+                    "id": {
+                        "label": "ID"
+                    },
+                    "name": {
+                        "label": "Name"
+                    }
+                }
         }
     }
 }

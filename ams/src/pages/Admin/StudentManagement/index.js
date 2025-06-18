@@ -7,15 +7,15 @@ import { deleteRequest, getRequest, resetStates, setFormData } from "./slice"
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 
-const TeacherManagement = () => {
+const StudentManagement = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { teachers, deleteAPIStatus } = useSelector(state => state?.teacher)
+    const { students, deleteAPIStatus } = useSelector(state => state?.student)
 
     const commonStrings = languageData?.common?.buttons
-    const localStrings = languageData?.pages?.teacherManagement
+    const localStrings = languageData?.pages?.studentManagement
 
     const headings = {
         id: {
@@ -31,7 +31,7 @@ const TeacherManagement = () => {
 
     const buttonHandler = () => {
         dispatch(setFormData({}));
-        navigate('/add_or_update_teacher', {
+        navigate('/add_or_update_student', {
             state: {
                 mode: 'add'
             }
@@ -40,7 +40,7 @@ const TeacherManagement = () => {
 
     const updateHandler = (r) => {
         dispatch(setFormData(r));
-        navigate('/add_or_update_teacher', {
+        navigate('/add_or_update_student', {
             state: {
                 mode: 'update'
             }
@@ -58,7 +58,7 @@ const TeacherManagement = () => {
             <Layout1 title={localStrings?.header} buttonTitle={commonStrings?.add} buttonHandler={buttonHandler}>
                 <ListView
                     headings={headings}
-                    rows={teachers}
+                    rows={students}
                     actions={{ updateHandler, deleteHandler }}
                 />
             </Layout1>
@@ -66,4 +66,4 @@ const TeacherManagement = () => {
     )
 }
 
-export default TeacherManagement;
+export default StudentManagement;

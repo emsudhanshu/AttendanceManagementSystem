@@ -1,9 +1,15 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import loginSlice from '../pages/Login/slice';
+import teacherSlice from '../pages/Admin/TeacherManagement/slice';
+import studentSlice from '../pages/Admin/StudentManagement/slice';
+import subjectSlice from '../pages/Admin/SubjectManagement/slice';
 
 // Combine all reducers.
 const allReducer = combineReducers({
   login: loginSlice,
+  teacher: teacherSlice,
+  student: studentSlice,
+  subject: subjectSlice
 });
 
 const rootReducer = (state, action) => {

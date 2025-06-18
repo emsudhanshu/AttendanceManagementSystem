@@ -11,4 +11,35 @@ export const loginSchema = () =>
             .required(languageData.common.validations.mandatory),
     });
 
-console.log(loginSchema())
+
+export const teacherSchema = () =>
+    Yup.object().shape({
+        id: Yup.string()
+            .required(languageData.common.validations.mandatory),
+        name: Yup.string()
+            .required(languageData.common.validations.mandatory),
+        subjects: Yup.array()
+            .required(languageData.common.validations.mandatory),
+        password: Yup.string()
+            .required(languageData.common.validations.mandatory),
+    });
+
+export const studentSchema = () =>
+    Yup.object().shape({
+        id: Yup.string()
+            .required(languageData.common.validations.mandatory),
+        name: Yup.string()
+            .required(languageData.common.validations.mandatory),
+        subjects: Yup.array()
+            .required(languageData.common.validations.mandatory),
+        password: Yup.string()
+            .required(languageData.common.validations.mandatory),
+    });
+
+export const subjectSchema = () =>
+    Yup.object().shape({
+        id: Yup.string()
+            .required(languageData.common.validations.mandatory),
+        name: Yup.string()
+            .required(languageData.common.validations.mandatory),
+    });
