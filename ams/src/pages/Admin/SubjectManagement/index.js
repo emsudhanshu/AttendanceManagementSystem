@@ -14,7 +14,6 @@ const SubjectManagement = () => {
 
     const { subjects, deleteAPIStatus } = useSelector(state => state?.subject)
 
-    console.log(subjects,'3243')
     const commonStrings = languageData?.common?.buttons
     const localStrings = languageData?.pages?.subjectManagement
 

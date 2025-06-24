@@ -25,6 +25,9 @@ const renderValue = (value) => {
         const Component = value;
         return <Component />;
     }
+    else if(Array.isArray(value)){
+        return value?.join(', ')
+    }
     // Direct text/number
     return value;
 };

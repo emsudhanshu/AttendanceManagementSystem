@@ -12,7 +12,7 @@ const Header = () => {
             </Grid>
             {loginAPIStatus == 1 &&
                 <Grid>
-                    <h4 style={{ padding: '20px', margin: '0px', textAlign: 'center' }}>{`${languageData.pages.login.welcome} ${getUserTypes(true)[formData?.userType]} - ${formData?.id}`} <Link sx={{paddingLeft: '20px'}}>Logout</Link></h4>
+                    <h4 style={{ padding: '20px', margin: '0px', textAlign: 'center' }}>{`${languageData.pages.login.welcome} ${getUserTypes(true)[formData?.userType]} - ${formData?.id}`} <Link sx={{paddingLeft: '20px', cursor: 'pointer'}} onClick={()=>window.location.reload()}>Logout</Link></h4>
                 </Grid>
             }
 

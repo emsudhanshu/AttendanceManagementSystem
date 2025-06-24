@@ -114,7 +114,7 @@ const SelectDropDown = ({
                             e.preventDefault();
                             toggleOption(o.value);
                           }}
-                          sx={selectedValues.includes(o.value) ? classes.selectedOption : {}}
+                          sx={selectedValues?.includes?.(o.value) ? classes.selectedOption : {}}
                         >
                           {o?.label}
                         </Typography>

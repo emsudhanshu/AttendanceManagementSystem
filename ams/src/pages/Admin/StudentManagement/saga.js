@@ -1,4 +1,4 @@
-import { call, delay, put, select, takeLatest } from 'redux-saga/effects';
+import { delay, put, takeLatest } from 'redux-saga/effects';
 import {
     addRequest,
     addSuccess,
@@ -12,39 +12,17 @@ import {
     deleteRequest,
     deleteSuccess,
     deleteFailure,
-    resetStates
 } from './slice';
 
-// import {
-//   FETCH_15GH,
-//   SUBMIT_15GH,
-//   ACKNOWLEDGEMENT_15GH,
-//   DOWNLOAD_15GH,
-//   DOWNLOAD_15GH_CERT,
-//   UPLOAD_15GH_CERT,
-//   SEND_OTP_API,
-//   VERIFY_OTP_API,
-//   FETCH_PROFILE_DETAILS,
-//   CUST_RELATIONSHIP_YEAR
-// } from "../../../common/constants/ApiEndpoints";
-// import { apiCall } from '../../../common/services/apiCall';
-
-import {
-    students_mock,
-} from './mocks';
-
-localStorage.setItem('students', JSON.stringify([]));
+import { addStudent, deleteStudent, getStudents, updateStudent } from '../../../api/student.api';
 
 export function* handleAddRequest(action) {
     try {
         // const response = yield call(apiCall, {apiUrl: FETCH_PROFILE_DETAILS, payload: {}});
         yield delay(100)
-        let students = JSON.parse(localStorage?.getItem('students'));
-        students.push(action?.payload);
-        localStorage.setItem("students", JSON.stringify(students));
+        addStudent(action?.payload)
         yield put(addSuccess());
     } catch (errorObject) {
-        console.log(errorObject)
         alert("Some error occured");
         yield put(addFailure(errorObject));
     }
@@ -54,12 +32,9 @@ export function* handleGetRequest(action) {
     try {
         // const response = yield call(apiCall, {apiUrl: FETCH_PROFILE_DETAILS, payload: {}});
         yield delay(100)
-        let students = JSON.parse(localStorage?.getItem('students'));
-        students = students?.length > 0 ? students : students_mock;
-        localStorage.setItem("students", JSON.stringify(students));
+        const students = getStudents();
         yield put(getSuccess(students));
     } catch (errorObject) {
-        console.log(errorObject)
         alert("Some error occured");
         yield put(getFailure(errorObject));
     }
@@ -69,20 +44,9 @@ export function* handleUpdateRequest(action) {
     try {
         // const response = yield call(apiCall, {apiUrl: FETCH_PROFILE_DETAILS, payload: {}});
         yield delay(100)
-        let students = JSON.parse(localStorage?.getItem('students'));
-        let updatedList = []
-        students?.map(t => {
-            if (t?.id == action?.payload?.id) {
-                updatedList.push(action?.payload)
-            }
-            else{
-                updatedList.push(t)
-            }
-        })
-        localStorage.setItem("students", JSON.stringify(updatedList));
+        updateStudent(action?.payload);
         yield put(updateSuccess());
     } catch (errorObject) {
-        console.log(errorObject)
         alert("Some error occured");
         yield put(updateFailure(errorObject));
     }
@@ -92,17 +56,9 @@ export function* handleDeleteRequest(action) {
     try {
         // const response = yield call(apiCall, {apiUrl: FETCH_PROFILE_DETAILS, payload: {}});
         yield delay(100)
-        let students = JSON.parse(localStorage?.getItem('students'));
-        let updatedList = []
-        students?.map(t => {
-            if (t?.id != action?.payload?.id) {
-                updatedList.push(t)
-            }
-        })
-        localStorage.setItem("students", JSON.stringify(updatedList));
+        deleteStudent(action?.payload);
         yield put(deleteSuccess());
     } catch (errorObject) {
-        console.log(errorObject)
         alert("Some error occured");
         yield put(deleteFailure(errorObject));
     }

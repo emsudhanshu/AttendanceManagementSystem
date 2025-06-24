@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 export const initialState = {
     formData: {},
     loginErrorMessage: '',
-    loginData: {},
+    loginData: {
+    },
     loginAPIStatus: 0,
 };
 
@@ -11,26 +12,25 @@ const loginSlice = createSlice({
     name: 'login',
     initialState,
     reducers: {
-        resetStates: ()=>({
+        resetStates: () => ({
             ...initialState
         }),
-        setFormData: (state,action) => {
+        setFormData: (state, action) => {
             return {
                 ...initialState,
                 formData: action?.payload
             }
         },
         loginRequest: (state, action) => {
-            console.log('ye baby i am in usa');
             return { ...state, formData: action?.payload, loginData: {}, loginAPIStatus: 0 };
         },
         loginSuccess: (state, action) => {
             const data = action.payload;
-            return { ...state, loginData: data, loginAPIStatus: 1 };
+            return { ...state, loginData: { profileDetails: data }, loginAPIStatus: 1 };
         },
         loginFailure: (state, action) => {
             const error = action.payload?.message;
-            return { ...state, formData: {}, loginErrorMessage: error, loginData: {}, loginAPIStatus: 2 };
+            return { ...state, loginErrorMessage: error, loginData: {}, loginAPIStatus: 2 };
         },
 
         extraReducers: {},

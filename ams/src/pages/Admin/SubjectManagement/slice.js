@@ -52,6 +52,7 @@ const subjectSlice = createSlice({
                 value: s?.id,
                 label: s?.name
             }))
+
             return { ...state, subjects, getAPIStatus: 1 };
         },
         getFailure: (state, action) => {

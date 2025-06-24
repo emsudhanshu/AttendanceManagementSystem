@@ -82,7 +82,6 @@ const SelectDropDown = ({
                           onChange(o)
                           e.preventDefault()
                           setOpen(false)
-                          console.log(e?.target?.getAttribute('value'))
                           data.form.setFieldValue(fieldId, e?.target?.getAttribute('value'));
                         }}>{o?.label}</Typography>
                       ))

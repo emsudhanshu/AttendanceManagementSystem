@@ -1,14 +1,14 @@
 export const subjects_mock = [
     {
-        id: '34213',
+        id: '111',
         name: 'Applied Machine Learning',
     },
     {
-        id: '1342`3',
+        id: '222',
         name: 'Probability and Stochastic Processs',
     },
     {
-        id: '34223',
+        id: '333',
         name: 'Deep Learning',
     }
-]
+]           

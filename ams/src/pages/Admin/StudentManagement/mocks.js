@@ -1,32 +1,14 @@
 export const students_mock = [
     {
         id: '34213',
-        name: 'rushikesh',
-        subjects: '5434'
+        name: 'Om Prakash Ghaansed',
+        subjects:  ["111", "222", "333"],
+        password: 'password'
     },
     {
-        id: '1342`3',
-        name: 'ram',
-        subjects: '5434'
-    },
-    {
-        id: '34223',
-        name: 'ayush',
-        subjects: '5434'
-    },
-    {
-        id: '3333423',
-        name: 'marvin',
-        subjects: '5434'
-    },
-    {
-        id: '3s444ddas423',
-        name: 'aryan',
-        subjects: '5434'
-    },
-    {
-        id: '44444444',
-        name: 'sudhanshu',
-        subjects: 'react'
+        id: '1234324',
+        name: 'Konamannan Reddy Biradi',
+        subjects:  ["222"],
+        password: 'password'
     }
 ]

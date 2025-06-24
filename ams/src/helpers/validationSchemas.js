@@ -43,3 +43,9 @@ export const subjectSchema = () =>
         name: Yup.string()
             .required(languageData.common.validations.mandatory),
     });
+
+export const attendanceSchema = () =>
+    Yup.object().shape({
+        subject: Yup.string()
+            .required(languageData.common.validations.mandatory),
+    });

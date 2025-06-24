@@ -19,19 +19,8 @@ const Login = () => {
     const { loginAPIStatus, formData } = useSelector(state => state?.login)
 
     useEffect(() => {
-
-        // navigate('/subject_management')
-
-        // navigate('/student_management')
-
-         navigate('/teacher_management')
-
-        // navigate('/add_or_update_teacher',{state: {
-        //     mode:'update'
-        // }})
-
         if (loginAPIStatus == 1) {
-            navigate('/admin_dashboard')
+            navigate('/dashboard')
         }
     }, [loginAPIStatus])
 
@@ -50,7 +39,6 @@ const Login = () => {
                     }}
                     validationSchema={loginSchema()}
                     onSubmit={values => {
-                        console.log(values)
                         dispatch(loginRequest(values))
                     }}
                 >
