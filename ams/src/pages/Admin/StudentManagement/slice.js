@@ -7,6 +7,7 @@ export const initialState = {
     addAPIStatus: 0,
 
     students: [],
+    students_id_name_map: {},
 
     getErrorMessage: '',
     getAPIStatus: 0,
@@ -47,11 +48,21 @@ const studentSlice = createSlice({
             return { ...state, getAPIStatus: 0 };
         },
         getSuccess: (state, action) => {
-            return { ...state, students: action?.payload, getAPIStatus: 1 };
+
+            let students_id_name_map = {}
+
+            let students = action?.payload?.map(s => {
+                students_id_name_map[s?.id] = s?.name;
+                return ({
+                    ...s,
+                })
+            })
+            
+            return { ...state, students, students_id_name_map, getAPIStatus: 1 };
         },
         getFailure: (state, action) => {
             const error = action.payload?.message;
-            return { ...state, students: [], getErrorMessage: error, getAPIStatus: 2 };
+            return { ...state, students: [], students_id_name_map: {}, getErrorMessage: error, getAPIStatus: 2 };
         },
 
         deleteRequest: (state, action) => {

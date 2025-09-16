@@ -7,6 +7,7 @@ export const initialState = {
     addAPIStatus: 0,
 
     subjects: [],
+    subjects_id_name_map: {},
 
     getErrorMessage: '',
     getAPIStatus: 0,
@@ -47,17 +48,26 @@ const subjectSlice = createSlice({
             return { ...state, getAPIStatus: 0 };
         },
         getSuccess: (state, action) => {
-            let subjects = action?.payload?.map(s=>({
-                ...s,
-                value: s?.id,
-                label: s?.name
-            }))
 
-            return { ...state, subjects, getAPIStatus: 1 };
+            let subjects_id_name_map = {}
+
+            let subjects = action?.payload?.map(s => {
+                
+                subjects_id_name_map[s?.id] = s?.name;
+
+                return ({
+                    ...s,
+                    value: s?.id,
+                    label: s?.name
+                })
+            })
+
+
+            return { ...state, subjects, subjects_id_name_map, getAPIStatus: 1 };
         },
         getFailure: (state, action) => {
             const error = action.payload?.message;
-            return { ...state, subjects: [], getErrorMessage: error, getAPIStatus: 2 };
+            return { ...state, subjects_id_name_map: {}, subjects: [], getErrorMessage: error, getAPIStatus: 2 };
         },
 
         deleteRequest: (state, action) => {

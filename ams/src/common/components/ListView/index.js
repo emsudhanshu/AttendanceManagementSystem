@@ -98,7 +98,7 @@ export default function ListView({ headings, rows, rowsPerPage = 5, setRows = ()
                             ))}
 
                             {(typeof (actions?.updateHandler) == `function` || typeof (actions?.updateHandler) == `function`) && (
-                                <TableCell>{languageData?.common?.texts?.actions}</TableCell>
+                                <TableCell sx={{fontWeight: 900, fontFamily: 'arial !important'}}>{languageData?.common?.texts?.actions}</TableCell>
                             )}
                         </TableRow>
                     </TableHead>

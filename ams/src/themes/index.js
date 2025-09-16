@@ -6,7 +6,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           // at single place font I am setting, no need to setup at other places, only font weight need to control if required
-          fontFamily: 'Open Sans !important',
+          fontFamily: 'arial !important',
         },
       },
       variants: [

@@ -23,5 +23,5 @@ export const getFormattedDate = () => {
   const month = monthNames[today.getMonth()];
   const year = today.getFullYear();
 
-  return `${day}${month}${year}`;
+  return `${day}-${month}-${year}`;
 }

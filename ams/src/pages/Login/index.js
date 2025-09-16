@@ -82,7 +82,7 @@ const Login = () => {
                                         errors={errors}
                                         touched={touched}
                                         type='password'
-                                        maxLength={10}
+                                        maxLength={20}
                                     />
                                 </Grid>
 

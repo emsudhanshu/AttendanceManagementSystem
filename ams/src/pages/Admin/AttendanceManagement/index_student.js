@@ -23,11 +23,19 @@ const AttendanceManagement = () => {
             label: 'Date of Attendance',
         },
         subjectId: {
-            label: 'subjectId',
+            label: 'Subject ID',
         },
         attendanceFlag: {
             label: 'Attendance Flag',
         }
+    }
+
+    const ToggleComponent = ({ attendanceFlag: flag }) => {
+        return (
+            <Button variant={flag == 0 ? `outlined` : 'contained'}>
+                <span>{`${flag == 0 ? `Absent` : 'Present'}`}</span>
+            </Button>
+        )
     }
 
     const dispatch = useDispatch();
@@ -87,7 +95,8 @@ const AttendanceManagement = () => {
                 studentId,
                 subjectId,
                 dateOfAttendance,
-                attendanceFlag: attendanceFlag
+                attendanceFlag: () => <ToggleComponent attendanceFlag={attendanceFlag} />
+
             });
         });
 

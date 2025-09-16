@@ -5,7 +5,8 @@ import languageData from "../../../strings/en.json"
 import { useDispatch, useSelector } from "react-redux"
 import { deleteRequest, getRequest, resetStates, setFormData } from "./slice"
 import { useNavigate } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { getRequest as getRequest_subjects} from "../SubjectManagement/slice"
 
 const TeacherManagement = () => {
 
@@ -24,7 +25,7 @@ const TeacherManagement = () => {
         name: {
             label: localStrings?.form?.name?.label,
         },
-        subjects: {
+        subjectsNames: {
             label: localStrings?.form?.subjects?.label,
         }
     }
@@ -48,17 +49,33 @@ const TeacherManagement = () => {
     }
     const deleteHandler = (r) => { dispatch(deleteRequest(r)) }
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(resetStates());
         dispatch(getRequest());
-    },[deleteAPIStatus])
+        dispatch(getRequest_subjects());
+    }, [deleteAPIStatus])
+
+    const [rows, setRows] = useState(teachers);
+
+    const { subjects_id_name_map } = useSelector(state => state?.subject)
+
+    useEffect(() => {
+        const rows = teachers?.map(s => {
+            return {
+                ...s,
+                subjectsNames: s?.subjects?.map(subId => subjects_id_name_map[subId])?.join(', ')
+            }
+        })
+        console.log(rows)
+        setRows(rows);
+    }, [teachers, subjects_id_name_map])
 
     return (
         <Grid>
             <Layout1 title={localStrings?.header} buttonTitle={commonStrings?.add} buttonHandler={buttonHandler}>
                 <ListView
                     headings={headings}
-                    rows={teachers}
+                    rows={rows}
                     actions={{ updateHandler, deleteHandler }}
                 />
             </Layout1>

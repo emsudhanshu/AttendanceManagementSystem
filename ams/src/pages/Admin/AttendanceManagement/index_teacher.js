@@ -16,9 +16,11 @@ import { useNavigate } from "react-router-dom"
 let updatedAttendanceRecords = {}
 
 const AttendanceManagement = () => {
-
+    
     const [rows, setRows] = useState([]);
-
+    
+    const { students_id_name_map } = useSelector(state => state?.student) 
+      
     const headings = {
         studentId: {
             label: 'Student ID',
@@ -26,14 +28,17 @@ const AttendanceManagement = () => {
         dateOfAttendance: {
             label: 'Date of Attendance',
         },
+        studentName: {
+            label: 'Student Name',
+        },
         subjectId: {
-            label: 'subjectId',
+            label: 'Subject ID',
         },
         attendanceFlag: {
             label: 'Attendance Flag',
         }
     }
-
+    
     const submitAttendance = () => {
         dispatch(addRequest(updatedAttendanceRecords))
     }
@@ -88,7 +93,7 @@ const AttendanceManagement = () => {
 
         return (
             <Button onClick={clickHandler} variant={state == 0 ? `outlined` : 'contained'}>
-                <span>{`${state} ${state == 0 ? `Absent` : 'Present'}`}</span>
+                <span>{`${state == 0 ? `Absent` : 'Present'}`}</span>
             </Button>
         )
     }
@@ -129,6 +134,8 @@ const AttendanceManagement = () => {
 
         const rows = transformAttendanceObjectToArray(attendanceNew)
 
+
+
         setRows(rows)
 
         return attendanceNew;
@@ -143,6 +150,7 @@ const AttendanceManagement = () => {
             const attendanceFlag = attendanceObject?.[key];
 
             row.push({
+                studentName: students_id_name_map[studentId],
                 studentId,
                 subjectId,
                 dateOfAttendance,
